@@ -1,4 +1,7 @@
 const router = require('express').Router();
+// this is a representative sample of the return json from our database.
+// from the point, the data that has been populated in our database needs to be translated into this format.
+
 
 const animes = [
 
@@ -37,19 +40,20 @@ const animes = [
         "rating": "A+",
     },
 ];
+
+
+
 router.get('/', async(req, res) => {
     res.render('home');
 })
 
-router.get('/anime', async(req, res) => {
-    console.log(animes);
-    return res.render('anime', { animes: animes })
+router.get('/anime/:num', async(req, res) => {
+    return res.render('singleAnime', animes[req.params.num - 1]);
 });
 
 
-router.get('/anime/:num', async(req, res) => {
-
-    return res.render('anime', animes[req.params.num - 1]);
+router.get('/anime', async(req, res) => {
+    return res.render('anime', { animes: animes })
 });
 
 console.log('anime rules')

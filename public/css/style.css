@@ -1,0 +1,35 @@
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imageResizer {
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.cardBorder {
+    border-radius: 50px;
+}
+
+.japaneseText {
+    color: red;
+    font-size: 1.2em;
+}
+
+.englishText {
+    font-style: italic;
+}
+
+.cardBackground {
+    background-color: rgba(45, 130, 187, 0.294);
+}
+
+
+/* .cardIndent {
+    margin-left: 3rem;
+    margin-top: 3rem;
+} */

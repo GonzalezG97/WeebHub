@@ -1,12 +1,24 @@
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">Anime</h5>
-        {{#each animes}}
-        <li>{{title}}</li>
-        <li>is {{description}}</li><br>
-        {{/each}}
-        <a href="#" class="btn btn-primary">sample</a>
-    </div>
+<div class="row">
+    {{#each animes}}
+    <div class="col-lg-3 d-flex align-items-stretch">
+        <div class="card shadow p-6 mb-5 bg-white rounded cardIndent cardBorder" style="width: 18rem;">
 
+            <div class="card-body cardBackground">
+                <div><img class="center card shadow p-4 mb-6 bg-body rounded imageResizer"
+                        src="{{posterImage.medium}}"><br>
+                </div>
+                <h2 class="card-title englishText">{{titles.en}}</h2>
+                <h4 class=" card-title japaneseText">{{titles.ja_jp}}</h4>
+                <h5>{{synopsis}}</h5>
+                <li>Average Rating: {{averageRating}}</li>
+                <li>Start Date: {{startDate}}</li>
+                <li>End Date: {{endDate}}</li>
+                <li>Age Rating: {{ageRatingGuide}}</li>
+                <li>Episode Count: {{episodeCount}}</li>
+                <li>Episode Length: {{episodeLength}}</li><br>
+
+            </div>
+
+        </div>
+    </div>{{/each}}
 </div>

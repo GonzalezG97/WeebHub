@@ -49,6 +49,7 @@ router.get('/', async(req, res) => {
 
 router.get('/anime/:num', async(req, res) => {
     return res.render('singleAnime', animes[req.params.num - 1]);
+    // this 
 });
 
 

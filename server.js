@@ -29,5 +29,6 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 app.use(require('./controllers/routes/anime_routes'));
 
-
-app.listen(PORT, () => console.log('Now listening'));
+sequelize.sync().then(() => {
+    app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
+});

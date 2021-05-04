@@ -13,3 +13,5 @@ User.hasMany(Review, {
 Review.belongsTo(User, {
     foreignKey: 'user_id'
 });
+
+module.exports = { Anime, User, Review }

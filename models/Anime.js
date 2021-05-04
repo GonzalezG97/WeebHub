@@ -9,26 +9,14 @@ Anime.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
         },
-        title: {
+        slug: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        avg_rating: {
-            type: DataTypes.INTEGER,
-        },
-        image_file: {
-            type: DataTypes.STRING
         }
     },
     {
         sequelize,
-        timestamps: true,
         freezeTableName: true,
         underscored: true,
         modelName: 'anime',

@@ -129,7 +129,7 @@ router.get('/reviews', async(req, res) => {
 })
 
 router.get('/search', async(req, res) => {
-    return res.render('search')
+    return res.render('singleAnime');
 })
 
 

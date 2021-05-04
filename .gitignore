@@ -1,3 +1,9 @@
+#windows
+.history
+
+#ios
+.DS_Store 
+
 # Logs
 logs
 *.log

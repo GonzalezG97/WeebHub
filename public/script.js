@@ -13,7 +13,13 @@ $(document).ready( () => {
         
         const urlSearch = encodeURIComponent($('#searchInput').val().toLowerCase());
 
-        
+        $.ajax({
+            url: `https://kitsu.io/api/edge/anime/?filter[text]=${urlSearch}`,
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+            }
+        })
     });
 
     

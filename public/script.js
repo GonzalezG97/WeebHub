@@ -16,8 +16,12 @@ $(document).ready( () => {
         $.ajax({
             url: `https://kitsu.io/api/edge/anime/?filter[text]=${urlSearch}`,
             dataType: 'json',
-            success: (data) => {
-                console.log(data);
+            success: (response) => {
+                let animeList = response.data;
+                // console.log(animeList);
+                for (const anime of animeList){
+                    console.log(anime);
+                }
             }
         })
     });

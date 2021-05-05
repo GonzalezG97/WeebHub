@@ -158,32 +158,79 @@ const animes = [
 reviews = [{
         "id": 1,
         "comment": "I really enjoyed the dynamic story and the Naruto run at the end!",
-        'rating': "35"
+        'rating': 35
+
     },
     {
         "id": 2,
         "comment": "The carnage and bloodshed was a little much for me. ",
-        'rating': "85"
+        'rating': 85
     },
     {
         "id": 3,
         "comment": "Hated it! ROFLCOPTER",
-        'rating': "20"
+        'rating': 20,
     },
     {
         "id": 4,
         "comment": "Who would've thought he could turn himself into a pickle? LulRblades",
-        'rating': "35"
+        'rating': "35",
+        "points": 263
     }
 
 
 ];
 
-router.get('/', async(req, res) => {
-    res.render('home');
-})
+user = [{
+
+        "id": 1,
+        "username": "PhatMan",
+        "email": "megadood@aol.com",
+        "points": 23
+
+    },
+    {
+        "id": 2,
+        "username": "Senpai",
+        "email": "roflcopter@aol.com",
+        "points": 26
+
+    },
+    {
+        "id": 3,
+        "username": "8up",
+        "email": "cool@aol.com",
+        "points": 46
+
+    },
+    {
+        "id": 4,
+        "username": "Anime_Master",
+        "email": "babblingCreek@aol.com",
+        "points": 09
+
+    },
+]
+
+singleAnimeSample =
+
+    router.get('/', async(req, res) => {
+        res.render('home');
+    });
+
+// router.post('/', async(req, res) => {
+
+// });
+router.get('/register', (req, res) => {
+    res.render('register');
+});
+
+// router.post('/register', (req, res) => {
+
+// })
+
 router.get('/anime/:num', async(req, res) => {
-    return res.render('singleAnime', animes[req.params.num - 1]);
+    return res.render('singleAnime', animes[req.params.num - 1], { reviews: reviews });
     // this 
 });
 router.get('/anime', async(req, res) => {
@@ -197,6 +244,8 @@ router.get('/reviews', async(req, res) => {
 router.get('/search', async(req, res) => {
     return res.render('singleAnime');
 })
+
+
 
 
 console.log('anime rules')

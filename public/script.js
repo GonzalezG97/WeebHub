@@ -17,10 +17,12 @@ $(document).ready( () => {
             url: `https://kitsu.io/api/edge/anime/?filter[text]=${urlSearch}`,
             dataType: 'json',
             success: (response) => {
-                let animeList = response.data;
-                // console.log(animeList);
-                for (const anime of animeList){
-                    console.log(anime);
+                let animeData = response.data;
+                
+                for (const anime of animeData){
+                    let animeList = anime.attributes
+                    console.log(animeList); //This shows the anime's in a list of objects
+                    
                 }
             }
         })

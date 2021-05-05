@@ -110,6 +110,72 @@ const animes = [
         'episodeCount': 26,
         'episodeLength': 25,
     },
+    {
+        "id": 1,
+        'titles': {
+            "en": "Cowboy Bebop",
+            "ja_jp": "カウボーイビバップ",
+        },
+        'averageRating': '88.55',
+        'startDate': '1998-04-03',
+        'endDate': '1999-04-24',
+        'ageRatingGuide': '17+ (violence & profanity)',
+        'posterImage': {
+            'tiny': 'https://media.kitsu.io/anime/poster_images/1/tiny.jpg?1431697256',
+            'small': 'https://media.kitsu.io/anime/poster_images/1/small.jpg?1431697256',
+            'medium': 'https://media.kitsu.io/anime/poster_images/1/medium.jpg?1431697256',
+            'large': 'https://media.kitsu.io/anime/poster_images/1/large.jpg?1431697256',
+            'original': 'https://media.kitsu.io/anime/poster_images/1/original.jpg?1431697256',
+        },
+        'synopsis': 'In the year 2071, humanity has colonoized several of the planets and moons...',
+        'episodeCount': 26,
+        'episodeLength': 25,
+    },
+    {
+        "id": 1,
+        'titles': {
+            "en": "Cowboy Bebop",
+            "ja_jp": "カウボーイビバップ",
+        },
+        'averageRating': '88.55',
+        'startDate': '1998-04-03',
+        'endDate': '1999-04-24',
+        'ageRatingGuide': '17+ (violence & profanity)',
+        'posterImage': {
+            'tiny': 'https://media.kitsu.io/anime/poster_images/1/tiny.jpg?1431697256',
+            'small': 'https://media.kitsu.io/anime/poster_images/1/small.jpg?1431697256',
+            'medium': 'https://media.kitsu.io/anime/poster_images/1/medium.jpg?1431697256',
+            'large': 'https://media.kitsu.io/anime/poster_images/1/large.jpg?1431697256',
+            'original': 'https://media.kitsu.io/anime/poster_images/1/original.jpg?1431697256',
+        },
+        'synopsis': 'In the year 2071, humanity has colonoized several of the planets and moons...',
+        'episodeCount': 26,
+        'episodeLength': 25,
+    }
+
+];
+
+reviews = [{
+        "id": 1,
+        "comment": "I really enjoyed the dynamic story and the Naruto run at the end!",
+        'rating': "35"
+    },
+    {
+        "id": 2,
+        "comment": "The carnage and bloodshed was a little much for me. ",
+        'rating': "85"
+    },
+    {
+        "id": 3,
+        "comment": "Hated it! ROFLCOPTER",
+        'rating': "20"
+    },
+    {
+        "id": 4,
+        "comment": "Who would've thought he could turn himself into a pickle? LulRblades",
+        'rating': "35"
+    }
+
 
 ];
 
@@ -125,7 +191,7 @@ router.get('/anime', async(req, res) => {
 });
 
 router.get('/reviews', async(req, res) => {
-    return res.render('reviews');
+    return res.render('reviews', { reviews: reviews });
 })
 
 router.get('/search', async(req, res) => {

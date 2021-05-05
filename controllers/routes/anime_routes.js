@@ -124,6 +124,14 @@ router.get('/anime', async(req, res) => {
     return res.render('anime', { animes: animes })
 });
 
+router.get('/reviews', async(req, res) => {
+    return res.render('reviews');
+})
+
+router.get('/search', async(req, res) => {
+    return res.render('singleAnime');
+})
+
 
 console.log('anime rules')
 

@@ -1,5 +1,5 @@
 const sequelize = require('../config/connection');
-const { User, Anime, Review } = require('../models');
+const { User, Anime, Review, AnimeTitle, PosterImage } = require('../models');
 const Kitsu = require('kitsu');
 
 const userData = require('./userData.json');
@@ -7,21 +7,23 @@ const reviewData = require('./reviewData.json');
 
 const api = new Kitsu();
 
-const seed = async () => {
+const PAGE_OFFSETS = [0, 20, 40, 60, 80, 100];
+const ANIME_FIELDSETS = 'id,titles,averageRating,startDate,endDate,ageRatingGuide,posterImage,synopsis,episodeCount,episodeLength';
 
-  const pageOffsets = [0, 20, 40, 60, 80, 100];
-  const newAnimeData = [];
+const seed = async () => {
 
   try {
 
     await sequelize.sync({ force: true });
 
-    // get anime data by pageoffsets
-    for (const offset of pageOffsets) {
-      const reqAnimeData = await api.get('anime', {
+    const apiAnimeData = [];
+    // iterate through page offsets and call anime api
+    for (const offset of PAGE_OFFSETS) {
+      console.log(`Requesting page ${offset} of anime data from Kitsu api...`);
+      const reqAnime = await api.get('anime', {
         params: {
           fields: {
-            anime: 'id,slug'
+            anime: ANIME_FIELDSETS
           },
           page: {
             limit: 20, 
@@ -29,45 +31,48 @@ const seed = async () => {
           }
         }
       });
+  
+      apiAnimeData.push(...reqAnime.data);
       
-      const reformatedAnimeData = [];
-      // reformats anime data bc sparse fieldset returns extra data
-      for (const anime of reqAnimeData.data) {
-        reformatedAnimeData.push({
-          id: anime.id,
-          slug: anime.slug
-        });
-      };
-
-      newAnimeData.push(...reformatedAnimeData);
     };
-
-    await Anime.bulkCreate(newAnimeData);
+    // adds animeTitle property to each anime object copied from titles
+    const reformattedApiAnimeData = apiAnimeData.map((anime) => {
+      return { ...anime, animeTitle: { ...anime.titles } }
+    });
     
-    const newAnimeCount = await Anime.count();
-    console.log(`${newAnimeCount} anime added!`);
-    await User.bulkCreate(userData, {
+    // creates Anime, PosterImage, and Title in one step
+    const newAnimeData = await Anime.bulkCreate(reformattedApiAnimeData, {
+      returning: true,
+      include: [
+        PosterImage,
+        AnimeTitle
+      ]
+    });
+    
+    const newAnime = newAnimeData.map((anime) => anime.get({ plain: true }));
+    
+    const newUsersData = await User.bulkCreate(userData, {
+      returning: true,
       individualHooks: true,
     });
 
-    const newUserCount = await User.count();
-    console.log(`${newUserCount} users added!`);
-    // insert random user reviews for random animes
+    const newUsers = newUsersData.map((user) => user.get({ plain: true }));
+    
+    // create random user reviews for random animes
     for (const review of reviewData) {
-      const randAnimeId = getRandomInt(1, newAnimeCount);
-      const randUserId = getRandomInt(1, newUserCount);
-
-      console.log({
-        ...review,
-        user_id: randUserId,
-        anime_id: randAnimeId
-      });
-
-      await Review.create({
-        ...review,
-        user_id: randUserId,
-        anime_id: randAnimeId
-      });
+      const randAnimeId = newAnime[getRandomInt(0, newAnime.length - 1)].id;
+      const randUserId = newUsers[getRandomInt(0, newUsers.length - 1)].id;
+      
+      await Review.create(
+        {
+          ...review,
+          user_id: randUserId,
+          anime_id: randAnimeId,
+        },
+        {
+          returning: true
+        }
+      );
 
     };
 

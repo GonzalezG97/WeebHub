@@ -1,7 +1,20 @@
 <!-- This template includes hardcoded data. In future lessons, you will be rendering data dynamically. -->
+<div class=" container ">
+    <div class="row collection">
+        {{#each reviews}}
 
+        <div class=" d-flex align-items">
+            <form>
+                <textarea class="textarea" id="review" readonly>
+            user: sample@email.com 
+            User rating: {{rating}}
+            {{comment}}             
+        </textarea>
+            </form>
+            {{{body}}}
+        </div>
+        {{/each}}
 
-<div>
-    <div>Reviews</div>
-    {{{body}}}
+    </div>
+    <input type="submit" value="Submit">
 </div>

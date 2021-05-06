@@ -3,23 +3,62 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{!--
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="../public/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
     <title>WEEBHUB</title>
 </head>
 
-<body>
-    {{{body}}}
-    {{all}}
 
+<body>
+
+    <div id='header'>
+        <div class="row">
+            <div class="col-2 nav ">
+                <ul class='cardIndent'>
+                    <li class='anchor'><a href="#home">Home</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="col-10">
+                <img class='headerImage' src="https://images8.alphacoders.com/423/thumb-1920-423151.jpg" />
+            </div>
+            <div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <div class="row" id="navRight">
+            <div class="col-12">
+                <div class="topnav">
+                    <div class="search-container" id="search">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Enter Your Favorite Anime" name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" id="content">
+            <div class="col-2"></div>
+            <div class="bodyRight">
+                {{{body}}}
+            </div>
+        </div>
+
+
+
+    </div>
 
 </body>
-<script type="text/javascript" src=""></script>
 
 </html>

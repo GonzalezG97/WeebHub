@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const sequelize = require('sequelize');
+const db = require('../../models');
 // this is a representative sample of the return json from our database.
 // from the point, the data that has been populated in our database needs to be translated into this format.
 
@@ -185,6 +187,7 @@ router.get('/search', (req, res) => {
     return res.render('animes/singleAnime', { animes: animes });
 })
 
+// return res.render('singleAnime');
 
 router.get('/reviews', (req, res) => {
     return res.render('animes/reviews', { reviews: reviews });

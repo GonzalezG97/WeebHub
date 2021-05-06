@@ -5,32 +5,34 @@
 // const animeList = 'https://kitsu.io/api/edge/anime';
 // const animeCategories = `https://kitsu.io/api/edge/anime?filter%5Bcategories%5D=${selectedCategory}`;
 
-$(document).ready(() => {
-  $("#searchButton").click(() => {
-    const urlSearch = encodeURIComponent($("#searchInput").val().toLowerCase());
+// $(document).ready(() => {
+//   $("#searchButton").click(() => {
+//     const urlSearch = encodeURIComponent($("#searchInput").val().toLowerCase());
 
-    $.ajax({
-      url: `https://kitsu.io/api/edge/anime/?filter[text]=${urlSearch}`,
-      dataType: "json",
-      success: (response) => {
-        let animeData = response.data;
+    
 
-        $("#displayDiv").empty();
+    // $.ajax({
+    //   url: `https://kitsu.io/api/edge/anime/?filter[text]=${urlSearch}`,
+    //   dataType: "json",
+    //   success: (response) => {
+    //     let animeData = response.data;
 
-        for (const { attributes } of animeData) {
-          console.log(attributes); //This shows the anime's in a list of objects
+    //     $("#displayDiv").empty();
 
-          $("#displayDiv").append(`<div>
-                        <h1>${attributes.canonicalTitle}</h1>
-                        <p>${attributes.description}</p>
-                        <p>Episodes:${attributes.episodeCount}</p>
-                        <p>${attributes.ageRating}</p>
-                        </div>`);
-        }
-      },
-    });
-  });
-});
+    //     for (const { attributes } of animeData) {
+    //       console.log(attributes); //This shows the anime's in a list of objects
+
+    //       $("#displayDiv").append(`<div>
+    //                     <h1>${attributes.canonicalTitle}</h1>
+    //                     <p>${attributes.description}</p>
+    //                     <p>Episodes:${attributes.episodeCount}</p>
+    //                     <p>${attributes.ageRating}</p>
+    //                     </div>`);
+    //     }
+    //   },
+    // });
+//   });
+// });
 
 // user types anime in search bar
 // clicks searchButton

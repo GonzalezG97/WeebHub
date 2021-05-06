@@ -272,6 +272,7 @@ router.get('/search', async(req, res) => {
 // 
 // 
 
+
 console.log('anime rules')
 
 module.exports = router;

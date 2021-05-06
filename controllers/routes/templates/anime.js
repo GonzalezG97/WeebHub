@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const sequelize = require('sequelize');
-const db = require('../../models');
-// this is a representative sample of the return json from our database.
-// from the point, the data that has been populated in our database needs to be translated into this format.
+const db = require('./../../../models');
+const Review = require('./../../../models/Review')
+const User = require('./../../../models/User')
+const Anime = require('./../../../models/Anime')
+    // this is a representative sample of the return json from our database.
+    // from the point, the data that has been populated in our database needs to be translated into this format.
 
 const animes = [
 
@@ -157,31 +160,31 @@ const animes = [
 
 ];
 
-const reviews = [{
-        "id": 1,
-        "comment": "I really enjoyed the dynamic story and the Naruto run at the end!",
-        'rating': 35
+// const reviews = [{
+//         "id": 1,
+//         "comment": "I really enjoyed the dynamic story and the Naruto run at the end!",
+//         'rating': 35
 
-    },
-    {
-        "id": 2,
-        "comment": "The carnage and bloodshed was a little much for me. ",
-        'rating': 85
-    },
-    {
-        "id": 3,
-        "comment": "Hated it! ROFLCOPTER",
-        'rating': 20,
-    },
-    {
-        "id": 4,
-        "comment": "Who would've thought he could turn himself into a pickle? LulRblades",
-        'rating': "35",
-        "points": 263
-    }
+//     },
+//     {
+//         "id": 2,
+//         "comment": "The carnage and bloodshed was a little much for me. ",
+//         'rating': 85
+//     },
+//     {
+//         "id": 3,
+//         "comment": "Hated it! ROFLCOPTER",
+//         'rating': 20,
+//     },
+//     {
+//         "id": 4,
+//         "comment": "Who would've thought he could turn himself into a pickle? LulRblades",
+//         'rating': "35",
+//         "points": 263
+//     }
 
 
-];
+// ];
 
 router.get('/search', (req, res) => {
     return res.render('animes/singleAnime', { animes: animes });
@@ -190,7 +193,34 @@ router.get('/search', (req, res) => {
 // return res.render('singleAnime');
 
 router.get('/reviews', (req, res) => {
-    return res.render('animes/reviews', { reviews: reviews });
+    let limit = 100;
+    let whereClause = {};
+    return Review.findAll({
+            limit: limit,
+            ...whereClause,
+            include: [{
+                model: User,
+                Anime
+
+            }]
+        })
+        .then(reviews => {
+            reviews = reviews.map(review => {
+                review = review.dataValues;
+
+                review.user = review.user.dataValues;
+                return review;
+            });
+            res.render('animes/reviews', { reviews: reviews })
+        })
+        // .then(cards => {
+        //     cards = cards.map(card => {
+        //         card = card.dataValues;
+        //         return card;
+        //     })
+        //     res.render('animes/reviews', { reviews: reviews })
+        // })
+
 })
 
 // Goes last since it will catch before other routes are checked

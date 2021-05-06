@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const sequelize = require('sequelize');
+const db = require('../../models');
 // this is a representative sample of the return json from our database.
 // from the point, the data that has been populated in our database needs to be translated into this format.
 
@@ -242,11 +244,33 @@ router.get('/reviews', async(req, res) => {
 })
 
 router.get('/search', async(req, res) => {
-    return res.render('singleAnime', { animes: animes });
+    console.log(req.query.search);
+    try {
+        const searchResults = await db.AnimeTitle.findAll({
+            where: {
+                en: req.query.search
+            }
+        })
+        const animeResults = await db.Anime.findOne({
+            include: [{
+                model: Anime.
+            }]
+        })
+        console.log(searchResults); //render and talk to rob
+        res.render('singleAnime', {animes:searchResults} )
+    }catch (err){
+        console.log(err);//hit other api
+        res.status(404);
+    };
+
+    // return res.render('singleAnime');
+
 })
 
-
-
+// 
+// 
+// 
+// 
 
 
 console.log('anime rules')

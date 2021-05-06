@@ -155,7 +155,7 @@ const animes = [
 
 ];
 
-reviews = [{
+const reviews = [{
         "id": 1,
         "comment": "I really enjoyed the dynamic story and the Naruto run at the end!",
         'rating': 35
@@ -181,74 +181,20 @@ reviews = [{
 
 ];
 
-user = [{
-
-        "id": 1,
-        "username": "PhatMan",
-        "email": "megadood@aol.com",
-        "points": 23
-
-    },
-    {
-        "id": 2,
-        "username": "Senpai",
-        "email": "roflcopter@aol.com",
-        "points": 26
-
-    },
-    {
-        "id": 3,
-        "username": "8up",
-        "email": "cool@aol.com",
-        "points": 46
-
-    },
-    {
-        "id": 4,
-        "username": "Anime_Master",
-        "email": "babblingCreek@aol.com",
-        "points": 09
-
-    },
-]
-
-singleAnimeSample =
-
-    router.get('/', async(req, res) => {
-        res.render('home');
-    });
-
-// router.post('/', async(req, res) => {
-
-// });
-router.get('/register', (req, res) => {
-    res.render('register');
-});
-
-// router.post('/register', (req, res) => {
-
-// })
-
-router.get('/anime/:num', async(req, res) => {
-    return res.render('singleAnime', animes[req.params.num - 1], { reviews: reviews });
-    // this 
-});
-router.get('/anime', async(req, res) => {
-    return res.render('anime', { animes: animes })
-});
-
-router.get('/reviews', async(req, res) => {
-    return res.render('reviews', { reviews: reviews });
-})
-
-router.get('/search', async(req, res) => {
-    return res.render('singleAnime', { animes: animes });
+router.get('/search', (req, res) => {
+    return res.render('animes/singleAnime', { animes: animes });
 })
 
 
+router.get('/reviews', (req, res) => {
+    return res.render('animes/reviews', { reviews: reviews });
+})
+
+// Goes last since it will catch before other routes are checked
+router.get('', (req, res) => {
+    return res.render('animes/anime', { animes: animes })
+});
 
 
-
-console.log('anime rules')
 
 module.exports = router;

@@ -5,7 +5,7 @@ const { Anime, AnimeTitle, PosterImage } = require('../../../models');
 
 // GET anime by search
 // /api/anime/?filter[text]=${urlSearch} => req.query = { filter: { text: 'cowboy' } }
-router.get('/', async (req, res) => {
+router.get('/', async(req, res) => {
     try {
         const foundAnimeData = await Anime.findOne();
         if (!foundAnimeData) {
@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err });
     }
+    res.render('home')
 });
 
 

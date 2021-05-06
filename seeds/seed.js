@@ -8,7 +8,7 @@ const reviewData = require('./reviewData.json');
 const api = new Kitsu();
 
 const PAGE_OFFSETS = [0, 20, 40, 60, 80, 100];
-const ANIME_FIELDSETS = 'id,titles,averageRating,startDate,endDate,ageRatingGuide,posterImage,synopsis,episodeCount,episodeLength';
+const ANIME_FIELDSETS = 'id,slug,titles,averageRating,startDate,endDate,ageRatingGuide,posterImage,synopsis,episodeCount,episodeLength';
 
 const seed = async () => {
 

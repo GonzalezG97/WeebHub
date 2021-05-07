@@ -5,12 +5,13 @@ const express = require('express');
 const expbs = require('express-handlebars');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
+const cookieParser = require('cookie-parser');
+const { passport } = require('./auth');
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const Handlebars = require('handlebars')
-    // const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
-const app = express();
-const PORT = process.env.PORT || 3002;
+const FileStore = require('session-file-store')(session);
 
 const hbs = expbs.create({
     defaultLayout: 'index',
@@ -26,9 +27,23 @@ const hbs = expbs.create({
 //     defaultLayout: 'index',
 //     extname: 'hbs'
 // });
+
+const app = express();
+const PORT = process.env.PORT || 3002;
+
+
 dotenv.config();
+app.use(require('cookie-parser')());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: new FileStore({ path: path.join(__dirname, 'sessions') }),
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('handlebars', hbs.engine);
 // app.set('view engine', 'hbs');

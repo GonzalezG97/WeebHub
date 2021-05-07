@@ -9,7 +9,7 @@
                 <div class="invalid-feedback" style="display: block">{{message}}</div>
                 {{/each}}
 
-                <form action="/register" method="POST">
+                <form action="/user/register" method="POST">
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
@@ -17,6 +17,12 @@
                         <small id="emailHelp" class="form-text text-muted">Tell the world about your weebdom! Register
                             now!
                             else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="username" class="form-control" id="username" aria-describedby="usernameHelp"
+                            placeholder="ユーザーネームを入力してください" name="username">
+                        <small id="usernameHelp" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

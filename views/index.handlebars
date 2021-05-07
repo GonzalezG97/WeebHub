@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../css/style.css" />
 
 
-
     <title>WEEBHUB</title>
     <div class="fixed-top">
         <div class="collapse" id="navbarToggleExternalContent">
@@ -23,8 +22,9 @@
                         <span class="text-muted">Get your weeb on!</span>
                     </div>
                     <div class='col-6'>
-                        <button id='navButton'><a class="text-white" href="/">
-                                Home
+                        {{#if user}}
+                        <button id='navButton'><a class="text-white" href="/logout">
+                                Logout
                             </a></button>
                         <button id='navButton'><a class="text-white" href="/anime">
                                 Anime Roll
@@ -33,9 +33,14 @@
                                 Reviews
                             </a></button>
                         </a></button>
+                        {{else}}
+                        <button id='navButton'><a class="text-white" href="/">
+                                Login
+                            </a></button>
                         <button id='navButton'><a class="text-white" href="/user/register">
                                 Register
                             </a></button>
+                        {{/if}}
                     </div>
                 </div>
 
@@ -46,6 +51,7 @@
                 data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
+                <div style="color: white">{{user.username}}</div>
             </button>
             <div class="search-container" id="search">
                 <form action="/anime/search">
@@ -64,7 +70,7 @@
         anime! We give you the stats that matter. Catch them all! --}}
     </div>
     <div class="container">
-        {{{body}}}
+        <div style="color: white">{{{body}}}</div>
     </div>
 
 </body>

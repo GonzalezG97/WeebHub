@@ -1,39 +1,41 @@
 const router = require('express').Router();
+const { Review, User, Anime, PosterImage, AnimeTitle } = require('./../../../models')
+const { passport, requireLogin } = require('../../../auth');
 
-user = [{
 
-        "id": 1,
-        "username": "PhatMan",
-        "email": "megadood@aol.com",
-        "points": 23
 
-    },
-    {
-        "id": 2,
-        "username": "Senpai",
-        "email": "roflcopter@aol.com",
-        "points": 26
-
-    },
-    {
-        "id": 3,
-        "username": "8up",
-        "email": "cool@aol.com",
-        "points": 46
-
-    },
-    {
-        "id": 4,
-        "username": "Anime_Master",
-        "email": "babblingCreek@aol.com",
-        "points": 09
-
-    },
-]
 
 router.get('/register', (req, res) => {
     res.render('user/register');
 });
+
+router.post('/register', (req, res) => {
+    let errors = [];
+    let email = req.body.email;
+    let password = req.body.password;
+    let username = req.body.username;
+    return User.findOne({ where: { email: email } }).then((user) => {
+        if (user) {
+            errors.push({ message: "Email already exists" });
+            return res.render('user/register', { errors: errors });
+        } else {
+            console.log(email);
+            console.log(username);
+            return User.create({ email: email, password: password, username: username }).then(user => {
+                    return res.redirect('/');
+                })
+                .catch((error) => {
+                    errors.push({ message: error });
+                    console.log(errors)
+                    return res.render('user/register', { errors: errors });
+                })
+        }
+    });
+});
+
+
+
+
 
 // router.post('/register', (req, res) => {
 

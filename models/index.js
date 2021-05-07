@@ -7,6 +7,7 @@ const PosterImage = require('./PosterImage');
 Anime.hasMany(Review, {
     foreignKey: 'anime_id'
 });
+Review.belongsTo(Anime);
 
 Anime.hasOne(AnimeTitle);
 AnimeTitle.belongsTo(Anime);
@@ -18,5 +19,6 @@ User.hasMany(Review);
 Review.belongsTo(User, {
     foreignKey: 'user_id'
 });
+
 
 module.exports = { Anime, User, Review, AnimeTitle, PosterImage }

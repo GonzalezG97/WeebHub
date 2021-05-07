@@ -36,7 +36,8 @@
     }
     
     body {
-        background: url('https://cdn.hipwallpaper.com/i/43/53/urRvyc.jpg') no-repeat center center fixed;
+        background: url('./akiraBG.jpg') no-repeat center center fixed;
+        /* background: url('https://cdn.hipwallpaper.com/i/43/53/urRvyc.jpg') no-repeat center center fixed; */
         -moz-background-size: cover;
         -webkit-background-size: cover;
         -o-background-size: cover;

@@ -3,16 +3,15 @@ const sequelize = require('../config/connection');
 
 class Anime extends Model {}
 
-Anime.init(
-    {
+Anime.init({
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
         },
-        slug: {
-            type: DataTypes.STRING
-        },
+        // slug: {
+        //     type: DataTypes.STRING
+        // },
         averageRating: {
             type: DataTypes.DECIMAL
         },
@@ -35,13 +34,15 @@ Anime.init(
             type: DataTypes.INTEGER
         }
     },
+
+
+
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'anime',
-    }
-);
+    });
 
 module.exports = Anime;

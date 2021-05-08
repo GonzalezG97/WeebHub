@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const sequelize = require('sequelize');
-const db = require('./../../../models');
 const { Review, User, Anime, PosterImage, AnimeTitle } = require('./../../../models')
 const { requireLogin } = require('../../../auth');
 const { request } = require('express');

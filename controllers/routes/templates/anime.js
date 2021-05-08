@@ -23,18 +23,24 @@ router.get('/search', requireLogin, (req, res) => {
         }
     }
     return AnimeTitle.findAll({
-            limit: limit,
-            ...whereClause,
-            include: [{
-                model: Anime,
-                include: [
-                    { model: PosterImage },
-                    { model: Review },
-                    // { model: User }
-                ],
-            }, ]
-        })
-        .then(titles => titles.map(record => record.get({ plain: true })))
+        limit: limit,
+        ...whereClause,
+        include: [{
+            model: Anime,
+            include: [
+                { model: PosterImage },
+                {
+                    model: Review,
+                    include: [
+                        { model: User }
+                    ]
+                },
+            ],
+        }, ]
+    })
+
+    .then(titles => titles.map(record => record.get({ plain: true })))
+        // .then(title => console.log(title[0].anime.reviews))
         .then(title => res.render('animes/singleAnime', { title: title, user: req.user }))
 });
 

@@ -32,9 +32,11 @@
                         {{comment}}             
                     </textarea>
                 </form>
-                <form>
-                    <textarea class="textarea"></textarea>
-                    <button class="submit">Reply</button>
+
+                <form class="review" data-animeid={{anime_id}}>
+                    {{!-- <input type=" text" id="anime_id" name="anime_id" value="anime_id"> --}}
+                    <textarea type="text" id="comment" class="textarea" name="comment"></textarea>
+                    <button type="submit" class="btn" value="Submit">Reply</button>
                 </form>
                 {{/each}}
             </div>

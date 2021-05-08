@@ -3,6 +3,7 @@ const sequelize = require('sequelize');
 const db = require('./../../../models');
 const { Review, User, Anime, PosterImage, AnimeTitle } = require('./../../../models')
 const { requireLogin } = require('../../../auth');
+const { request } = require('express');
 
 
 router.get('/search', requireLogin, (req, res) => {
@@ -31,8 +32,11 @@ router.get('/search', requireLogin, (req, res) => {
                 { model: PosterImage },
                 {
                     model: Review,
-                    include: [
-                        { model: User }
+                    include: [{
+                            model: User,
+                            attributes: ['username']
+                        }
+
                     ]
                 },
             ],
@@ -43,6 +47,19 @@ router.get('/search', requireLogin, (req, res) => {
         // .then(title => console.log(title[0].anime.reviews))
         .then(title => res.render('animes/singleAnime', { title: title, user: req.user }))
 });
+
+router.post('/reviews', requireLogin, (req, res) => {
+    Review.create({
+            comment: req.body.comment,
+            user_id: req.user.id,
+            anime_id: req.body.animeId
+        })
+        // console.log(req.body);
+        // console.log(req.user);
+        .then(res.render('animes/singleAnime'))
+});
+
+// .then(reviews => res.render('animes/reviews', { reviews: reviews, user: req.user }))
 
 router.get('/reviews', requireLogin, (req, res) => {
     let limit = 100;

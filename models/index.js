@@ -12,6 +12,11 @@ Review.belongsTo(Anime);
 Anime.hasOne(AnimeTitle);
 AnimeTitle.belongsTo(Anime);
 
+// AnimeTitle.hasOne(Review);
+// Review.belongsTo(AnimeTitle);
+// Review.hasOne(AnimeTitle);
+// AnimeTitle.belongsTo(Review);
+
 Anime.hasOne(PosterImage);
 PosterImage.belongsTo(Anime);
 

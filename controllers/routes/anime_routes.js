@@ -253,7 +253,7 @@ router.get('/search', async(req, res) => {
         })
         const animeResults = await db.Anime.findOne({
             include: [{
-                model: Anime.
+                model: Anime
             }]
         })
         console.log(searchResults); //render and talk to rob
